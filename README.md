@@ -1,2 +1,2 @@
-# laken-learns-to-program
-Short basic lessons for my friend getting into programming
+# Intro to JS
+Short basic lessons for getting into programming
