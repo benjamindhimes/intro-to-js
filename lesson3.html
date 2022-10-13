@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Lesson 3</title>
+</head>
+<style>
+    body {
+        padding-left: 20%;
+        padding-right: 20%;
+        padding-top: 10%;
+        font-family: Arial,sans-serif;
+    }
+    .bold {
+        font-weight: bold;
+    }
+</style>
+<body>
+    <h1>Lesson 3 - Functions, Type Conversions</h1>
+    <p>
+        Carrying over from Lesson 2, let's expand our click counter.
+    </p>
+    <p>
+        We now have two counters, one button, and a number input field.
+    </p>
+    <p>
+        Go ahead and click the button, and notice how the first counter increases by 1 and the second counter
+        decreases by the same amount. Now change the number in the <span class="bold">Incremental Value</span> field,
+        and click the button again.
+    </p>
+    <p>
+        <label class="bold" for="incrementalValue">Incremental Value</label>
+        <!-- Note how we use `type="number"` here to make this input only take numbers -->
+        <input id="incrementalValue" type="number" value="1">
+    </p>
+    <button id="clicker">Click me senpai</button>
+    <p id="counter1">0</p>
+    <p id="counter2">0</p>
+</body>
+<script>
+
+    // We're going to declare our first named functions here
+    // `increment` and `decrement` are basically the same, but they either increment of decrement the value
+    // and they each act on a different counter
+    // `increment` acts on counter1
+    // `decrement` acts on counter2
+    // they take a single argument, an integer named `incrementalValue`
+    function increment(incrementalValue) {
+        // we're going to declare the `counter` constant the object of `document.getElementById(...` so we
+        // don't need to keep typing the whole document.get... each time we need to reference it.
+        // even though this is a constant, we can still change the attributes of it.
+        const counter = document.getElementById("counter1");
+        // now, going back to lesson 2, we want to change the value by an integer rather than a string
+        // in order to do that, we have to type convert the HTML string into an int by calling the `parseInt` function
+        // on the value of the HTML
+        // this changes '1' to 1
+        const originalValue = parseInt(counter.innerHTML);
+        // now we're going to set the counter's HTML value to the changed value (original value + incremental value)
+        counter.innerHTML = originalValue + incrementalValue;
+    }
+
+    function decrement(incrementalValue) {
+        // same thing as increment, but we're working on `counter2`
+        const counter = document.getElementById("counter2");
+        const originalValue = parseInt(counter.innerHTML);
+        // and we're decrementing the value
+        counter.innerHTML = originalValue - incrementalValue;
+    }
+
+    document.getElementById("clicker").addEventListener(
+        "click",
+        function () {
+            // just like in line 56, we need to convert the string value of the Incremental Value field to an int
+            // so that we can do arithmetic on the value
+            const incrementalValue = parseInt(document.getElementById("incrementalValue").value);
+            // next we call the `increment` function and pass the integer as an argument (remember: args go inside
+            // the parentheses)
+            increment(incrementalValue);
+            // and again with `decrement`
+            decrement(incrementalValue);
+        }
+    )
+    // You'll notice that can type decimal numbers into the Incremental Value field, but it only ever updates by
+    // integers. This is because we convert the string to an integer specifically in line 75.
+    // Go ahead and change `parseInt` to `parseFloat` in line 75 and then type a decimal number like 2.3
+    // into Incremental Value, and observe the results. Hit the button a few times and notice it doesn't seem to be
+    // working correctly. Instead of increasing from 2.3 to 4.6, it increases from 2.3 to 4.3
+    // That's because we're still converting the strings of counter1 and counter2 to integers
+    // in lines 57 and 65. Thus, it's adding 2.3 to 2 instead of adding 2.3 to 2.3
+    // The program is working correctly, but not working how we intend, because we didn't give
+    // the computer the right instructions.
+
+    // Exercise: add a new input like the one in line 34, make sure you assign it an ID, and then increment the value
+    // of counter1 by the amount in the new input, while decrementing the value of the counter2 by the original input.
+</script>
+</html>
