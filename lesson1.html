@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Lesson 1</title>
+</head>
+<body>
+    <h1 id="lessonTitle">Lesson 1</h1>
+    <p>
+        The first lesson is going to be very simple and just demonstrate how JavaScript works in relation to HTML.
+        You have a cursory understanding of HTML. This is going to be "vanilla" Javascript (e.g. no use of
+        frameworks or libraries, such as jQuery). The button below will change header of this page from "Lesson 1" to
+        "Lesson 1 Done".
+    </p>
+    <button id="titleChange">Click me senpai</button>
+    <h3 id="emptyBlock"></h3>
+</body>
+<script>
+    // 'document' refers to the entire web page, the '.' after 'document' means "we want to access an attribute
+    // of this item. Refer to W3Schools for figuring out everything inside of it:
+    // https://www.w3schools.com/jsref/dom_obj_document.asp
+    // So when we call 'getElementById', we're accessing an element of the document, and specifiying the id
+    // of that element. Notice how in line 14, we define the 'id' of the button as "titleChange". So we're accessing
+    // that element.
+    // If this is confusing, think of it like the document is an apple, and you're calling apple.getElementById("stem")
+    // to just reference the stem of that apple.
+    // next we call 'addEventListener', which does exactly like it says. It adds something to that element. In this case,
+    // it adds a function which listens for a specific action
+    document.getElementById("titleChange").addEventListener(
+        // we're telling the element to run (execute) the function when someone clicks on it
+        "click",
+        // this function takes no arguments, because we don't actually care about anything other than the click itself
+        // arguments are within the parenthesis. Javascript is a bit different from many languages in that you
+        // don't actually need to specify arguments when defining a function, even if (like in this case), there are
+        // going to be arguments passed to it anyway (ignore these for now)
+        function () {
+            // here, we're doing the same thing, we're getting the 'lessonTitle' element (line 5), and doing something
+            // to it. In this case, we're changing the text in the 'innerHTML' attribute. How do you remember that's
+            // the attribute that needs changed? Again, just reference W3Schools.
+            document.getElementById("lessonTitle").innerHTML = "Lesson 1 Done";
+        }
+    )
+    // Great. Clicking the button updates the text. What are you going supposed to do now?
+    // Well, there's an empty text field on line 16 with the id 'emptyBlock'. Change the function on line 14 to, when
+    // the button is clicked, update the text in that field to something like "Yay me! I did it!"
+</script>
+</html>
