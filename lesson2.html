@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Lesson 2</title>
+</head>
+<body>
+    <h1 id="lessonTitle">Lesson 2 - Math and variables</h1>
+    <p>
+        The second lesson is going to be just doing some basic math (counting by 1 each time you click the button below).
+        This is also a <b>basic</b> intro to variables and types.  Note when doing these lessons, make sure you save
+        the file and reload the page after every change. If you don't, you might be looking at the old version of the page,
+        and that can get frustrating because you'll be chasing down problems that you've already solved.
+    </p>
+    <button id="clicker">Click me senpai</button>
+    <p>Click counter: </p>
+    <span id="clickCount"></span>
+</body>
+<script>
+
+    // Javascript variables are declared using one of three different keywords: var, const, let. In many older
+    // JS tutorials or Stack Overflow answers, you'll see the var keyword used often. Typically, you can just use let
+    // instead. I won't get into why at this point, but generally you should stick to let and const.
+    // let means that you're declaring a variable, and its value might change at some point, while const
+    // indicates that the value will not change ever.
+    // Here, we're declaring the 'count' variable with an initial value of 0. It is *very* important that you do not
+    // use quotes around the 0, as that changes the type from an integer (a number) to a string.
+    let count = 0;
+    // next we're setting the initial value of the click counter (line 15) to the variable we just declared. Notice
+    // how line 15 has no text in the tag. If we didn't do this next line, it would be blank, but instead it's 0.
+    document.getElementById("clickCount").innerText = count;
+
+    // much like lesson 1, we're setting a click event listener to our button
+    document.getElementById("clicker").addEventListener(
+        "click",
+        // which executes this function
+        function () {
+             // the function is going to run everything within the {curly braces}
+             // in this case it's increasing the value of our count variable by 1.
+             // The `+=` syntax is just shorthand for `count = count + 1`. You would basically never want to write out
+             // the long-hand form.
+             count += 1;
+             // because the `count` variable isn't "bound" to the clickCount element, we need to set it again
+             document.getElementById("clickCount").innerText = count;
+             // when you click the button, the `count` variable increases by 1, and sets the resulting value to the
+             // element's text again.
+        }
+    )
+    // Great. Clicking the button updates the counter. What are you going supposed to do now?
+    // Well, remember how I said it was super important not to write `let count = "0";`? Go ahead and place quotes
+    // on line 26 and see how that affects this. Update that and then read on.
+
+    // Seriously, do it before you keep reading.
+
+    // You'll notice that each click adds a "1" to the end of the text. Why is this? It's because Javascript is a
+    // "weakly-typed" language, mean there are implicit type conversions. This can create a whole host of problems,
+    // but can also make it easy to get into initially. JS is doing its best to guess what you mean, and because it
+    // can't figure out that "0" is a number, it assumes you just want to add "1" to the end of the string.
+
+    // Now remove the quotes from line 26 that you added, and change line 40 to decrement the number on click instead of
+    // incrementing it. You can figure out how to do that.
+</script>
+</html>
