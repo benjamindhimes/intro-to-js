@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Lesson 4</title>
+</head>
+<style>
+    body {
+        padding-left: 20%;
+        padding-right: 20%;
+        padding-top: 10%;
+        font-family: Arial,sans-serif;
+    }
+</style>
+<body>
+    <h1>Lesson 4 - If-Then and Comparisons</h1>
+    <p>
+        'If' statements are a very important aspect of programming. They enable us to execute different code
+        depending on the values we're assessing.
+    </p>
+    <p>
+        In this lesson, we're forgoing the button entirely and instead updating on a change to
+        the <span class="bold">Score</span> input. Enter a grade score here and then click out of the field
+        or press enter. Notice how the grade shows.
+    </p>
+    <p>
+        <label style="padding-right: 10px;" for="score">Score</label><input type="number" id="score">
+    </p>
+    <p>Grade for your score is: <span class="bold" id="grade"></span></p>
+</body>
+<script>
+
+    // we start by adding an event listener the same as we as have been doing
+    document.getElementById("score").addEventListener(
+        // however, in this case, we're adding the listener to an input field rather than a button,
+        // and we're also using the "change" event rather than the "click" we had been using. This means the
+        // function will trigger when there is a change to the field, such as entering data into it and hitting enter
+        // or clicking outside the field.
+        "change",
+        // Notice that in this function we are passing a function, which we've named `event`, because in this case
+        // we actually care about the value of the item we're adding the listener to (we want the value of the input)
+        // We can name the argument anything we want. I've chosen to name it `event` but usually in examples on the web,
+        // you'll see it named `e` or something similar, just to keep it concise.
+        function (event) {
+            // we know that we're going to use a `grade` variable to set the grade, but we haven't figured out
+            // what that grade is yet, so we simply declare it with let, without setting a value.
+            let grade;
+            // here, we're naming `event.target.value` which is the value of our input field.
+            // how do we know that's what where the value lies? W3Schools again:
+            // https://www.w3schools.com/jsref/dom_obj_event.asp
+            // to be completely honest, I usually just google it when I can't remember stuff like this.
+            let score = event.target.value;
+
+            // An `if` statement is very simple. If the code in the parentheses produces a true value, the code in the
+            // brackets is executed. If not, it moves on to the next `if else`, etc. until it gets to the `else` brackets
+            if (score => 90) {
+                // if we had a value of 100 here, it's going to produce an A, because 100 is 'greater than or equal to' 90
+                grade = "A";
+            } else if (score >= 80) {
+                grade = "B";
+            } else if (score >= 70) {
+                grade = "C";
+            } else if (score >= 60) {
+                grade = "D";
+            } else {
+                // Your `if` statements will usually end in an `else`. It basically acts as a default result if nothing
+                // else matches. So if the score is 59 or lower, we will receive an 'F'
+                grade = "F";
+            }
+            // we set our 'grade' span text to the `grade` variable we've just set in our `if` statement.
+            document.getElementById("grade").innerText = grade;
+        }
+    )
+    // Exercise: Tell the user they've passed if they've scored at least a C. If they score a D or lower, tell the user
+    // they have failed. "Oh but a D is passing," you might be thinking. Not in my book.
+    // Bonus: tell the user how many points they missed the next grade by. E.g. if they score an 89, it should tell
+    // the user they missed the grade by 1 point.
+</script>
+</html>
