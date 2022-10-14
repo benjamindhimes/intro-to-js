@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Lesson 6</title>
+</head>
+<style>
+    body {
+        padding-left: 20%;
+        padding-right: 20%;
+        padding-top: 10%;
+        font-family: Arial,sans-serif;
+    }
+    table {
+        width: 50%;
+        border-collapse: collapse;
+    }
+    table, th, td {
+        border: 1px solid;
+    }
+    thead {
+        background-color: lightgrey;
+    }
+    td {
+        padding-right: 10px;
+    }
+</style>
+<body>
+    <h1>Lesson 6 - Objects n'at</h1>
+    <p>
+        Having a table that's already completed isn't super helpful. Let's allow the user to make
+        their own table, calculating the score as we go.
+    </p>
+    <p>
+        <span id="scoreText">Score: </span>
+        <span id="score"></span>
+    </p>
+    <table>
+        <thead>
+            <tr>
+                <th>Question</th>
+                <th>Correct?</th>
+            </tr>
+        </thead>
+        <tbody id="tableBody">
+        </tbody>
+    </table>
+    <button id="addCorrectNode">Add Correct Row</button>
+    <button id="addIncorrectNode">Add Incorrect Row</button>
+
+</body>
+<script>
+
+    // we're going to have to calculate the score at the end, so let's start with declaring our variables, and
+    // initializing their values at 0
+    let corrects = 0;
+    let incorrects = 0;
+
+    // a function with a capital first letter, such as this, is an object constructor.
+    // this constructor takes two arguments: `correctness` and `idx`
+    function Row(correctness, idx) {
+        // the `this` keyword refers to the object for inside the curly braces.
+        // when we set `this.rowNode`, we are creating an attribute of the Row called `rowNode` and setting its value
+        // in this case, we are creating a document element object of the table-row type ('tr' in the DOM)
+        this.rowNode = document.createElement("tr");
+        // we are setting the class name of this row as "bodyRow", because we'll use that later to count the rows
+        this.rowNode.className = "bodyRow";
+        // we are then setting the value of the internal HTML (all the HTML within the element) to a row we're creating
+        this.rowNode.innerHTML = "<td>" + idx + "</td><td>" + correctness + "</td>";
+    }
+
+    // this function takes a string arg `correctness`. We should pass only either "Correct" or "Incorrect" into it
+    function addRow(correctness) {
+        // we get all the bodyRow class elements we've created (line 70), we'll use these to know how many rows we
+        // have at row creation, and increment by 1 each time to get the index (`idx`) to create the next row
+        const bodyRows = document.getElementsByClassName("bodyRow");
+        // we construct a Row object using the `new` operator. It's saying "we want to create a new object of the Row
+        // type, using the parameters we're specifying. Some objects, like Python, do this implicitly.
+        const row = new Row(correctness, bodyRows.length+1);
+        // we are then going to add this row node to the end of the table body
+        document.getElementById("tableBody").appendChild(row.rowNode);
+        return 0;
+    }
+
+    // function used to calculate score, we should call this each time the table gets updated
+    function calculateScore() {
+        // It's rare that we would care about the score of a test beyond 2 decimal places.
+        // Having a score like 14.67777777778 would be unwieldy to look at, so we're going to create a number
+        // formatter that limits the maximum digits after the decimal to 2.
+        // First, we'll need to create an object that hold our options. Creating an object this way
+        // (without a constructor) is called an object literal.
+        const options = {
+            // we're assigning it a single attribute: `maximumFractionDigits` and setting that to 2
+            maximumFractionDigits: 2
+        }
+        // we are then creating a formatter object from the Intl.NumberFormat constructor, and passing our
+        // localization info ("en-US") into it, along with our options object we've created.
+        const formatter = new Intl.NumberFormat("en-US", options);
+        // we're formatting our float as a string with our formatter here to set that score to our readable number
+        document.getElementById("score").innerText = formatter.format(corrects / (corrects + incorrects) * 100);
+    }
+
+    // much like we had been doing with `addEventListener` before, setting the `onclick` function just makes that
+    // a bit more terse.
+    document.getElementById("addCorrectNode").onclick = function () {
+        corrects++;
+        addRow("Correct");
+        calculateScore();
+    };
+    document.getElementById("addIncorrectNode").onclick = function () {
+        incorrects++;
+        addRow("Incorrect");
+        calculateScore();
+    };
+
+    // Exercise: Create a third button which clears the table completely, but which allows the "Add Rows" buttons to
+    // work afterward. Change the 'scoreText' element to give the user a hint to use the button before the score will
+    // be displayed. After the user has pressed a button at least once, and we have a score, change this to "Score :"
+
+</script>
+</html>
