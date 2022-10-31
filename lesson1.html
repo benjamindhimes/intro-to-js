@@ -28,7 +28,7 @@
     // of this item". Refer to W3Schools for figuring out everything inside of it:
     // https://www.w3schools.com/jsref/dom_obj_document.asp
     // So when we call 'getElementById', we're accessing an element of the document, and specifiying the id
-    // of that element. Notice how in line 14, we define the 'id' of the button as "titleChange". So we're accessing
+    // of that element. Notice how in line 23, we define the 'id' of the button as "titleChange". So we're accessing
     // that element.
     // If this is confusing, think of it like the document is an apple, and you're calling apple.getElementById("stem")
     // to just reference the stem of that apple.
@@ -42,14 +42,14 @@
         // don't actually need to specify arguments when defining a function, even if (like in this case), there are
         // going to be arguments passed to it anyway (ignore these for now)
         function () {
-            // here, we're doing the same thing, we're getting the 'lessonTitle' element (line 5), and doing something
+            // here, we're doing the same thing, we're getting the 'lessonTitle' element (line 16), and doing something
             // to it. In this case, we're changing the text in the 'innerHTML' attribute. How do you remember that's
             // the attribute that needs changed? Again, just reference W3Schools.
             document.getElementById("lessonTitle").innerHTML = "Lesson 1 Done";
         }
     )
     // Great. Clicking the button updates the text. What are you going supposed to do now?
-    // Well, there's an empty text field on line 16 with the id 'emptyBlock'. Change the function on line 14 to, when
+    // Well, there's an empty text field on line 24 with the id 'emptyBlock'. Change the function on line 44 to, when
     // the button is clicked, update the text in that field to something like "Yay me! I did it!"
 </script>
 </html>

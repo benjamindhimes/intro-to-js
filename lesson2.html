@@ -34,8 +34,8 @@
     // Here, we're declaring the 'count' variable with an initial value of 0. It is *very* important that you do not
     // use quotes around the 0, as that changes the type from an integer (a number) to a string.
     let count = 0;
-    // next we're setting the initial value of the click counter (line 15) to the variable we just declared. Notice
-    // how line 15 has no text in the tag. If we didn't do this next line, it would be blank, but instead it's 0.
+    // next we're setting the initial value of the click counter (line 25) to the variable we just declared. Notice
+    // how line 25 has no text in the tag. If we didn't do this next line, it would be blank, but instead it's 0.
     document.getElementById("clickCount").innerText = count;
 
     // much like lesson 1, we're setting a click event listener to our button
@@ -56,7 +56,7 @@
     )
     // Great. Clicking the button updates the counter. What are you going supposed to do now?
     // Well, remember how I said it was super important not to write `let count = "0";`? Go ahead and place quotes
-    // on line 26 and see how that affects this. Update that and then read on.
+    // on line 36 and see how that affects this. Update that and then read on.
 
     // Seriously, do it before you keep reading.
 
@@ -65,7 +65,7 @@
     // but can also make it easy to get into initially. JS is doing its best to guess what you mean, and because it
     // can't figure out that "0" is a number, it assumes you just want to add "1" to the end of the string.
 
-    // Now remove the quotes from line 26 that you added, and change line 40 to decrement the number on click instead of
+    // Now remove the quotes from line 36 that you added, and change line 50 to decrement the number on click instead of
     // incrementing it. You can figure out how to do that.
 </script>
 </html>
